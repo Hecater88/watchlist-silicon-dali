@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const useFetchWithInterval = <T>(fetchFunction: () => Promise<T>) => {
+const useFetchWithInterval = <T>(
+	fetchFunction: () => Promise<T>,
+	refreshInterval?: number
+) => {
 	const [data, setData] = useState<T | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
+	const intervalRef = useRef<number | null>(null);
 
 	const fetchData = async () => {
 		try {
@@ -28,9 +32,13 @@ const useFetchWithInterval = <T>(fetchFunction: () => Promise<T>) => {
 
 	useEffect(() => {
 		fetchData();
-		const interval = setInterval(fetchData, 5000);
-		return () => clearInterval(interval);
-	}, []);
+		if (refreshInterval) {
+			intervalRef.current = setInterval(fetchData, refreshInterval);
+			return () => {
+				if (intervalRef.current) clearInterval(intervalRef.current);
+			};
+		}
+	}, [refreshInterval]);
 
 	return { data, loading, error, refetch: fetchData, reset };
 };

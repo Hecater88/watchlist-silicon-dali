@@ -2,7 +2,7 @@ import useFetchWithInterval from "@/app/hooks/useFetch";
 import { getMarketData, searchCoins } from "@/services/api";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useDebounce } from "../hooks/useDebounce";
 
 export default function Index() {
@@ -14,7 +14,7 @@ export default function Index() {
 		data: coins,
 		loading: coinsLoading,
 		error: coinsError,
-	} = useFetchWithInterval(() => getMarketData());
+	} = useFetchWithInterval(() => getMarketData(), 50000);
 
 	const debauncedSearch = useDebounce(query, 600);
 
@@ -46,11 +46,13 @@ export default function Index() {
 				}}
 			/>
 			{coinsToRender?.map((coin) => (
-				<View key={coin.id} className="mb-4 p-4 bg-white rounded-lg shadow">
-					<Text>{coin.name}</Text>
-					<Text>{coin.symbol.toUpperCase()}</Text>
-					<Text>{coin.current_price}</Text>
-				</View>
+				<TouchableOpacity onPress={() => router.push(`/coins/${coin.id}`)}>
+					<View key={coin.id} className="mb-4 p-4 bg-white rounded-lg shadow">
+						<Text>{coin.name}</Text>
+						<Text>{coin.symbol.toUpperCase()}</Text>
+						<Text>{coin.current_price}</Text>
+					</View>
+				</TouchableOpacity>
 			))}
 		</View>
 	);
