@@ -1,3 +1,4 @@
+import FavoriteToggle from "@/components/FavoriteToggle";
 import { getCoinDetail, getHistoricalData } from "@/services/api";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
@@ -47,6 +48,7 @@ const CoinDetailScreen = () => {
 			<Text style={{ fontSize: 24, fontWeight: "bold" }}>
 				{coin.name} ({coin.symbol.toUpperCase()})
 			</Text>
+			<FavoriteToggle coinId={coinId} />
 			<Text style={{ fontSize: 20, marginTop: 8 }}>💲{coin.price}</Text>
 			<Text
 				style={{
