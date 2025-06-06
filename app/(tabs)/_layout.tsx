@@ -30,14 +30,6 @@ const _layout = () => {
 					headerShown: false,
 				}}
 			/>
-
-			<Tabs.Screen
-				name="favorites"
-				options={{
-					title: "Favorites",
-					headerShown: false,
-				}}
-			/>
 		</Tabs>
 	);
 };

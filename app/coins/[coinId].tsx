@@ -2,7 +2,12 @@ import { getCoinDetail, getHistoricalData } from "@/services/api";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Image, ScrollView, Text } from "react-native";
-import { VictoryAxis, VictoryChart, VictoryLine, VictoryTheme } from "victory";
+import {
+	VictoryAxis,
+	VictoryChart,
+	VictoryLine,
+	VictoryTheme,
+} from "victory-native";
 import useFetchWithInterval from "../hooks/useFetch";
 
 const CoinDetailScreen = () => {
@@ -11,7 +16,7 @@ const CoinDetailScreen = () => {
 		data: coin,
 		loading: loadingCoin,
 		error: errorCoin,
-	} = useFetchWithInterval(() => getCoinDetail(coinId), undefined);
+	} = useFetchWithInterval(() => getCoinDetail(coinId));
 	const [chartData, setChartData] = useState<{ x: Date; y: number }[]>([]);
 
 	useEffect(() => {

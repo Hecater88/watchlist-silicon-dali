@@ -2,8 +2,14 @@ import useFetchWithInterval from "@/app/hooks/useFetch";
 import { getMarketData, searchCoins } from "@/services/api";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
-import { useDebounce } from "../hooks/useDebounce";
+import {
+	ScrollView,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	View,
+} from "react-native";
+import useDebounce from "../hooks/useDebounce";
 
 export default function Index() {
 	const router = useRouter();
@@ -45,15 +51,19 @@ export default function Index() {
 					marginBottom: 16,
 				}}
 			/>
-			{coinsToRender?.map((coin) => (
-				<TouchableOpacity onPress={() => router.push(`/coins/${coin.id}`)}>
-					<View key={coin.id} className="mb-4 p-4 bg-white rounded-lg shadow">
-						<Text>{coin.name}</Text>
-						<Text>{coin.symbol.toUpperCase()}</Text>
-						<Text>{coin.current_price}</Text>
-					</View>
-				</TouchableOpacity>
-			))}
+			<ScrollView style={{ flex: 1, padding: 16 }}>
+				{coinsToRender?.map((coin) => (
+					<TouchableOpacity
+						key={coin.id}
+						onPress={() => router.push(`/coins/${coin.id}`)}>
+						<View className="mb-4 p-4 bg-white rounded-lg shadow">
+							<Text>{coin.name}</Text>
+							<Text>{coin.symbol.toUpperCase()}</Text>
+							<Text>{coin.current_price}</Text>
+						</View>
+					</TouchableOpacity>
+				))}
+			</ScrollView>
 		</View>
 	);
 }
