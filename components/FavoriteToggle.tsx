@@ -1,4 +1,5 @@
 import { useFavoritesStore } from "@/store/favoriteStore";
+import { Ionicons } from "@expo/vector-icons";
 import { Text, TouchableOpacity } from "react-native";
 
 type Props = {
@@ -14,7 +15,13 @@ const FavoriteToggle = ({ coinId }: Props) => {
 
 	return (
 		<TouchableOpacity onPress={toggle}>
-			<Text>{isFavorite(coinId) ? "⭐" : "☆"}</Text>
+			<Text>
+				{isFavorite(coinId) ? (
+					<Ionicons name="heart-sharp" size={20} color={"red"} />
+				) : (
+					<Ionicons name="heart-outline" size={20} color={"black"} />
+				)}
+			</Text>
 		</TouchableOpacity>
 	);
 };

@@ -13,7 +13,6 @@ const useFetchWithInterval = <T>(
 		try {
 			setLoading(true);
 			setError(null);
-
 			const result = await fetchFunction();
 			setData(result);
 		} catch (err) {

@@ -1,8 +1,9 @@
+const API_BASE_URL = "https://api.coingecko.com/api/v3";
+
 export const getMarketData = async () => {
 	const response = await fetch(
-		"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+		`${API_BASE_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`
 	);
-	console.log("response", response);
 	if (!response.ok) {
 		throw new Error("Failed to fetch market data");
 	}
@@ -11,7 +12,7 @@ export const getMarketData = async () => {
 
 export const searchCoins = async (query: string) => {
 	const res = await fetch(
-		`https://api.coingecko.com/api/v3/search?query=${encodeURIComponent(query)}`
+		`${API_BASE_URL}/search?query=${encodeURIComponent(query)}`
 	);
 	if (!res.ok) throw new Error("Error searching coins");
 	const data = await res.json();
@@ -19,7 +20,7 @@ export const searchCoins = async (query: string) => {
 };
 
 export const getCoinDetail = async (coinId: string) => {
-	const res = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`);
+	const res = await fetch(`${API_BASE_URL}/coins/${coinId}`);
 	if (!res.ok) throw new Error("Error fetching coin detail");
 	const data = await res.json();
 
@@ -36,7 +37,7 @@ export const getCoinDetail = async (coinId: string) => {
 
 export const getHistoricalData = async (coinId: string) => {
 	const res = await fetch(
-		`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7`
+		`${API_BASE_URL}coins/${coinId}/market_chart?vs_currency=usd&days=7`
 	);
 
 	if (!res.ok) throw new Error("Error fetching historical data");

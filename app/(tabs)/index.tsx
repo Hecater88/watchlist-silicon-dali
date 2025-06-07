@@ -3,6 +3,7 @@ import { getMarketData, searchCoins } from "@/services/api";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
+	ActivityIndicator,
 	ScrollView,
 	Text,
 	TextInput,
@@ -38,6 +39,7 @@ export default function Index() {
 	};
 
 	const coinsToRender = query ? searchResults : coins;
+
 	return (
 		<View className="flex-1" style={{ padding: 20 }}>
 			<TextInput
@@ -51,18 +53,30 @@ export default function Index() {
 					marginBottom: 16,
 				}}
 			/>
-			<ScrollView style={{ flex: 1, padding: 16 }}>
-				{coinsToRender?.map((coin) => (
-					<TouchableOpacity
-						key={coin.id}
-						onPress={() => router.push(`/coins/${coin.id}`)}>
-						<View className="mb-4 p-4 bg-white rounded-lg shadow">
-							<Text>{coin.name}</Text>
-							<Text>{coin.symbol.toUpperCase()}</Text>
-							<Text>{coin.current_price}</Text>
-						</View>
-					</TouchableOpacity>
-				))}
+			<ScrollView style={{ paddingBottom: 16 }}>
+				{coinsLoading ? (
+					<ActivityIndicator
+						size="large"
+						color="#0000ff"
+						className="mt-10 self-center"
+					/>
+				) : coinsError ? (
+					<Text style={{ color: "red" }}>
+						Error al cargar las monedas: {coinsError.message}
+					</Text>
+				) : (
+					coinsToRender?.map((coin) => (
+						<TouchableOpacity
+							key={coin.id}
+							onPress={() => router.push(`/coins/${coin.id}`)}>
+							<View className="mb-4 p-4 bg-white rounded-lg shadow">
+								<Text>{coin.name}</Text>
+								<Text>{coin.symbol.toUpperCase()}</Text>
+								<Text>{coin.current_price}</Text>
+							</View>
+						</TouchableOpacity>
+					))
+				)}
 			</ScrollView>
 		</View>
 	);
