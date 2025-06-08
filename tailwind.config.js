@@ -2,21 +2,28 @@
 module.exports = {
 	content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
 	presets: [require("nativewind/preset")],
+	darkMode: "class",
 	theme: {
 		extend: {
 			colors: {
-				primary: "#030014",
-				secondary: "#151312",
-				light: {
-					100: "#D6C6FF",
-					200: "#A8B5DB",
-					300: "#9CA4AB",
+				background: {
+					light: "#ffffff",
+					dark: "#0f0d23",
 				},
-				dark: {
-					100: "#221f3d",
-					200: "#0f0d23",
+				surface: {
+					light: "#f4f4f5",
+					dark: "#151312",
 				},
+				text: {
+					light: "#000000",
+					dark: "#ffffff",
+				},
+				primary: "#4f46e5",
 				accent: "#AB8BFF",
+				border: {
+					light: "#e5e7eb",
+					dark: "#3f3f46",
+				},
 			},
 		},
 	},

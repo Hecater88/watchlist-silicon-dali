@@ -1,50 +1,95 @@
-# Welcome to your Expo app 👋
+# MyWatchlist 📈
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Cryptocurrency tracking app built with **React Native**, **Expo Router**, **TypeScript**, **Zustand**, and **Tailwind CSS (NativeWind)**. It provides detailed and up-to-date information about coins, as well as the ability to manage your favorites.
 
-## Get started
+## ⚠ Limitations
 
-1. Install dependencies
+- Due to **CoinGecko API call limitations**, detailed information is not fetched for each coin in the Favorites screen.
+- Only the coin ID is stored, so names are displayed directly from local storage.
 
-   ```bash
-   npm install
-   ```
+## 🧩 Technologies
 
-2. Start the app
+- **React Native + Expo**
+- **Expo Router**
+- **TypeScript**
+- **Zustand** (favorites and theme management)
+- **NativeWind** (Tailwind CSS for React Native)
+- **react-native-chart-kit** (charts)
+- **AsyncStorage**
+- **API**: [CoinGecko](https://www.coingecko.com/en/api)
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## ✨ Key Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 🏠 Home
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Debounced search for cryptocurrencies.
+- Dynamic list with `useFetchWithInterval` (auto-refresh every 5mins).
+- Toggle to switch between light and dark themes.
 
-## Get a fresh project
+### ❤️ Favorites
 
-When you're ready, run:
+- Persistent favorites system using Zustand + AsyncStorage.
+- Grid display (2 columns).
+- Quick access to coin details.
 
-```bash
-npm run reset-project
+### 📊 Coin Detail
+
+- Image, name, and current price.
+- Favorite toggle.
+- Scrollable historical chart.
+- Clear layout with well-separated sections.
+
+## 🌓 Light / Dark Theme
+
+- Implemented with `Zustand` + NativeWind (`darkMode: 'class'`).
+- Switch to toggle themes.
+- Full design adapts to current mode.
+
+---
+
+## 🧠 Architecture
+
+```
+/app
+  /(tabs)
+    index.tsx           ← Home
+    favorites.tsx       ← Favorites
+  /coins/[coinId].tsx   ← Detail
+/components             ← Reusable: Chart, Favorite toggle
+/hooks                  ← Debounce and auto-fetch
+/store                  ← Zustand (favorites and theme)
+/services               ← API calls
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 🛠 Installation
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+git clone https://github.com/your_user/mywatchlist.git
+cd mywatchlist
+npm install
+npx expo start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 💡 Improvements If I Had More Time
 
-Join our community of developers creating universal apps.
+- Offline support with local data cache,to avoid making repeated API calls when returning to an already visited screens
+- Add basic login with secure data storage
+- Automated tests (unit + e2e)
+- Implement settings screen
+- Animations when adding/removing favorites and charts
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🗓 Development Log
+
+- 📅 **Monday, June 2, 2025** _(~1h total)_ – Meeting with Kiko (CTO) (30 min). Afternoon: project planning, functionality definition, and initial organization (30 min).
+- 📅 **Tuesday, June 3, 2025** _(~40 min)_ – Implementation of the main view with coin listing, search, API calls, and routing.
+- 📅 **Wednesday, June 4, 2025** _(~30 min)_ – Development of the coin detail view with basic info and chart.
+- 📅 **Thursday, June 5, 2025** – Inactive day (dental treatment).
+- 📅 **Friday, June 6, 2025** _(~1h)_ – Implementation of favorites screen, Zustand state management, and local persistence.
+- 📅 **Saturday, June 7, 2025** _(~4–5h)_ – Theme system integration (dark/light), UI refactor, visual improvements, loading states, error handling, type fixing and bug fixes.
+- 📅 **Sunday, June 8, 2025** _(~1:30h)_ – Final improvements, design review, and documentation (README).

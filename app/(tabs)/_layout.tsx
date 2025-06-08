@@ -1,3 +1,4 @@
+import { useThemeStore } from "@/store/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { Text, View } from "react-native";
@@ -9,41 +10,47 @@ type Props = {
 	title: string;
 };
 const TabIcon = ({ focused, iconName, title }: Props) => {
+	const { theme } = useThemeStore();
+	const activeColor = theme === "dark" ? "#ffffff" : "#000000";
+
 	return (
-		<View className="flex flex-row gap-2 items-center justify-center">
-			<Ionicons
-				name={iconName}
-				size={20}
-				color={focused ? "#FFFFFF" : "#A8B5DB"}
-			/>
+		<View className="flex flex-row gap-2 items-center justify-center min-w-[70px]">
+			<Ionicons name={iconName} size={20} color={activeColor} />
 			{focused && (
-				<Text className="text-white text-xs font-medium">{title}</Text>
+				<Text className="text-text-light dark:text-text-dark text-xs font-medium">
+					{title}
+				</Text>
 			)}
 		</View>
 	);
 };
 const _layout = () => {
+	const { theme } = useThemeStore();
+	const isDark = theme === "dark";
 	return (
-		<SafeAreaView style={{ flex: 1 }} edges={["top", "bottom"]}>
+		<SafeAreaView className="flex-1 bg-background-light dark:bg-background-dark">
 			<Tabs
 				screenOptions={{
 					tabBarShowLabel: false,
 					tabBarItemStyle: {
-						width: "auto",
-						height: "auto",
-						justifyContent: "center",
+						paddingVertical: 10,
 						alignItems: "center",
+						justifyContent: "center",
+						width: "auto",
 					},
 					tabBarStyle: {
-						backgroundColor: "#0F0D23",
-						borderRadius: 50,
+						backgroundColor: isDark ? "#0F0D23" : "#ffffff",
+						borderRadius: 30,
 						marginHorizontal: 20,
-						marginBottom: 36,
-						height: 40,
+						marginBottom: 24,
+						height: 30,
 						position: "absolute",
-						overflow: "hidden",
+						shadowColor: isDark ? "#ffffff22" : "#00000033",
+						borderColor: isDark ? "#3f3f46" : "#e5e7eb",
 						borderWidth: 1,
-						borderColor: "#0F0D23",
+						elevation: 12,
+						shadowOffset: { width: 0, height: 6 },
+						shadowOpacity: 0.25,
 					},
 				}}>
 				<Tabs.Screen

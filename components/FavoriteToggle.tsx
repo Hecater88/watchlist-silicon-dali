@@ -1,6 +1,7 @@
 import { useFavoritesStore } from "@/store/favoriteStore";
+import { useThemeStore } from "@/store/theme";
 import { Ionicons } from "@expo/vector-icons";
-import { Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 type Props = {
 	coinId: string;
@@ -8,20 +9,27 @@ type Props = {
 
 const FavoriteToggle = ({ coinId }: Props) => {
 	const { isFavorite, addFavorite, removeFavorite } = useFavoritesStore();
+	const { theme } = useThemeStore();
 
+	const favorited = isFavorite(coinId);
 	const toggle = () => {
-		isFavorite(coinId) ? removeFavorite(coinId) : addFavorite(coinId);
+		favorited ? removeFavorite(coinId) : addFavorite(coinId);
 	};
+	const activeColor = favorited
+		? theme === "dark"
+			? "#F87171"
+			: "#DC2626"
+		: theme === "dark"
+		? "#94A3B8"
+		: "#64748B";
 
 	return (
-		<TouchableOpacity onPress={toggle}>
-			<Text>
-				{isFavorite(coinId) ? (
-					<Ionicons name="heart-sharp" size={20} color={"red"} />
-				) : (
-					<Ionicons name="heart-outline" size={20} color={"black"} />
-				)}
-			</Text>
+		<TouchableOpacity onPress={toggle} activeOpacity={0.7}>
+			<Ionicons
+				name={favorited ? "heart-sharp" : "heart-outline"}
+				size={28}
+				color={activeColor}
+			/>
 		</TouchableOpacity>
 	);
 };
