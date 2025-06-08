@@ -1,21 +1,20 @@
 # MyWatchlist 📈
-
-Cryptocurrency tracking app built with **React Native**, **Expo Router**, **TypeScript**, **Zustand**, and **Tailwind CSS (NativeWind)**. It provides detailed and up-to-date information about coins, as well as the ability to manage your favorites.
+A simple, sleek mobile app to track your favorite cryptocurrencies in real-time.
 
 ## ⚠ Limitations
-
-- Due to **CoinGecko API call limitations**, detailed information is not fetched for each coin in the Favorites screen.
-- Only the coin ID is stored, so names are displayed directly from local storage.
+	•	Using the free tier of the CoinGecko API, which limits the number of requests per minute.
+	•	The Favorites screen only stores and displays coin IDs; detailed information is not fetched to avoid exceeding API limits.
+	•	If too many requests are made in a short time, CoinGecko may block requests temporarily. You’ll need to wait a few minutes to continue using the app.
 
 ## 🧩 Technologies
 
-- **React Native + Expo**
-- **Expo Router**
-- **TypeScript**
-- **Zustand** (favorites and theme management)
-- **NativeWind** (Tailwind CSS for React Native)
-- **react-native-chart-kit** (charts)
-- **AsyncStorage**
+- **TypeScript** – Type safety
+- **React Native + Expo** – App core
+- **Expo Router** – Navigation and routing
+- **Zustand** – State management (favorites and theme)
+- **NativeWind** – Tailwind CSS for styling
+- **AsyncStorage** – Local persistence
+- **react-native-chart-kit** – Graph display
 - **API**: [CoinGecko](https://www.coingecko.com/en/api)
 
 ---
@@ -31,21 +30,20 @@ Cryptocurrency tracking app built with **React Native**, **Expo Router**, **Type
 ### ❤️ Favorites
 
 - Persistent favorites system using Zustand + AsyncStorage.
-- Grid display (2 columns).
 - Quick access to coin details.
+- Ability to remove favorites directly
 
 ### 📊 Coin Detail
 
 - Image, name, and current price.
 - Favorite toggle.
-- Scrollable historical chart.
+- Scrollable horizontal historical chart.
 - Clear layout with well-separated sections.
 
 ## 🌓 Light / Dark Theme
 
 - Implemented with `Zustand` + NativeWind (`darkMode: 'class'`).
 - Switch to toggle themes.
-- Full design adapts to current mode.
 
 ---
 
@@ -61,6 +59,7 @@ Cryptocurrency tracking app built with **React Native**, **Expo Router**, **Type
 /hooks                  ← Debounce and auto-fetch
 /store                  ← Zustand (favorites and theme)
 /services               ← API calls
+/types                  ← Type definitions
 ```
 
 ---
@@ -76,9 +75,9 @@ npx expo start
 
 ---
 
-## 💡 Improvements If I Had More Time
+## 💡 Improvements If I Had More Time (Ordered by Priority)
 
-- Offline support with local data cache,to avoid making repeated API calls when returning to an already visited screens
+- Offline support with local data caching, avoid repeated API calls on previously visited screens
 - Add basic login with secure data storage
 - Automated tests (unit + e2e)
 - Implement settings screen
@@ -86,10 +85,10 @@ npx expo start
 
 ## 🗓 Development Log
 
-- 📅 **Monday, June 2, 2025** _(~1h total)_ – Meeting with Kiko (CTO) (30 min). Afternoon: project planning, functionality definition, and initial organization (30 min).
-- 📅 **Tuesday, June 3, 2025** _(~40 min)_ – Implementation of the main view with coin listing, search, API calls, and routing.
-- 📅 **Wednesday, June 4, 2025** _(~30 min)_ – Development of the coin detail view with basic info and chart.
-- 📅 **Thursday, June 5, 2025** – Inactive day (dental treatment).
-- 📅 **Friday, June 6, 2025** _(~1h)_ – Implementation of favorites screen, Zustand state management, and local persistence.
-- 📅 **Saturday, June 7, 2025** _(~4–5h)_ – Theme system integration (dark/light), UI refactor, visual improvements, loading states, error handling, type fixing and bug fixes.
-- 📅 **Sunday, June 8, 2025** _(~1:30h)_ – Final improvements, design review, and documentation (README).
+- 📅 **Monday, June 2, 2025** _(~1h total)_ – Meeting with Kiko (CTO) (30 min) + initial project planning and project configurations (30 min)🗂️
+- 📅 **Tuesday, June 3, 2025** _(~40 min)_ – Built home screen, search, API calls, and routing 🔍
+- 📅 **Wednesday, June 4, 2025** _(~30 min)_ – Development of the coin detail view with basic info and chart📈
+- 📅 **Thursday, June 5, 2025** – No work - Inactive day (dental treatment) 😷
+- 📅 **Friday, June 6, 2025** _(~1h)_ – Implementation of favorites screen, Zustand state management, and local persistence ❤️
+- 📅 **Saturday, June 7, 2025** _(~4–5h)_ – Theme system integration (dark/light), UI refactor, visual improvements, loading states, error handling, type fixing and bug fixes 🛠️
+- 📅 **Sunday, June 8, 2025** _(~1:30h)_ – Final improvements, design review, and documentation (README) 🧹
